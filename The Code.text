@@ -1,1 +1,44 @@
+-- Create Tables
+CREATE TABLE gift_recipients (
+    recipient_id INT PRIMARY KEY,
+    recipient_name VARCHAR(50),
+    additional_info VARCHAR(100)
+);
+
+CREATE TABLE gifts (
+    gift_id INT PRIMARY KEY,
+    gift_name VARCHAR(50),
+    gift_category VARCHAR(50)
+);
+
+-- Add Data to gift_recipients
+INSERT INTO gift_recipients (recipient_id, recipient_name, additional_info)
+VALUES
+    (1, 'John Doe', 'Likes gadgets'),
+    (2, 'Jane Smith', 'Enjoys books'),
+    (3, 'Michael Johnson', 'Loves sports'),
+    (4, 'Emily Williams', 'Adores cooking'),
+    (5, 'Chris Brown', 'Music enthusiast');
+
+-- Add Data to gifts
+INSERT INTO gifts (gift_id, gift_name, gift_category)
+VALUES
+    (101, 'Smartphone', 'Electronics'),
+    (102, 'Book Set', 'Literature'),
+    (103, 'Sports Equipment', 'Sports'),
+    (104, 'Cookware Set', 'Kitchen'),
+    (105, 'Headphones', 'Electronics');
+
+-- Left Outer Join: List of all gift recipients and the gifts they are receiving for Christmas
+SELECT
+    GR.recipient_id,
+    GR.recipient_name,
+    GR.additional_info,
+    G.gift_id,
+    G.gift_name,
+    G.gift_category
+FROM
+    gift_recipients GR
+LEFT JOIN
+    gifts G ON GR.recipient_id = G.gift_id;
 
